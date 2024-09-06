@@ -62,10 +62,38 @@ import sys; sys.stdin = open('sample_input.txt')
 10 1 1 2 1 2 2 1 2 1
 '''
 
-def dfs(charge) :
-    pass
+def dfs(bus_stop, cnt, N) : #정류장 번호, 교체 횟수, 마지막 정류장
+    global mx_cnt
+
+    if bus_stop == N:
+        if mx_cnt >= cnt :
+            mx_cnt = cnt
+        return
+
+    if cnt >= mx_cnt :
+        return
+
+    battery = arr[bus_stop - 1]
+    
+    if battery >= N-bus_stop :
+        battery = N - bus_stop
+
+
+    # 갈 수 있는 범위 탐색
+    for i in range(battery, 0, -1) :
+        next_stop = bus_stop + i
+        cnt += 1
+        dfs(next_stop, cnt, N)
+        cnt -= 1
 
 T = int(input())
 
 for tc in range(1, T+1) :
-    pass
+    tmp = list(map(int, input().split()))
+    N, arr = tmp[0], tmp[1:]
+
+    # battery = 0
+    mx_cnt = N
+    dfs(1, 0, N)
+    
+    print(f'#{tc} {mx_cnt-1}')
