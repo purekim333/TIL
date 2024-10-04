@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>INDEX</h1>
+
+<a href="{% url "articles:create" %}"> <img src="{% static "chinese.png" %}" alt="china"></a>
+
+{% for article in articles %}
+  <p>글번호: {{article.pk}}</p>
+  <p>글번호: {{article.title}}</p>
+  <a href="{% url "articles:detail" article.pk %}">[상세보기]</a>
+  <hr>
+{% empty %}
+  <p>데이터 없음</p>
+{% endfor %}
+
+{% endblock content %}

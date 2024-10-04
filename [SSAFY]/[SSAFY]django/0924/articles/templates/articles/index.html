@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>INDEX</h1>
+
+{% for article in articles  %}
+<p>글번호 : {{ article.pk }} </p>
+<p>글제목 : {{ article.title }} </p>
+<a href="{% url "articles:detail" article.pk %}" class='btn btn-primary'>상세보기</a>
+<hr>
+{% empty %}
+<p>작성된 게시글이 없습니다.</p>
+{% endfor %}
+
+{% endblock content %}

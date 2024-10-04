@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form action="{% url "articles:create" %}">
+  <div>
+    <label for="title" class='form-label'>제목 :</label>
+    <input type="text" class='form-control' name='title'>
+  </div>
+  <div>
+    <label for="content" class='form-label'>내용 :</label>
+    <input type="text" class='form-control' name='contnet'>
+  </div>
+</form>
+{% endblock content %}
