@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>할 일 목록 관리 메인 페이지</h1>
+<hr>
+<p>할 일 목록</p>
+<ul>
+  <li>
+    <a href="/todos/{{work}}">{{ work }}</a>
+  </li>
+  <li>
+    <a href="{% url "todos:detail" work %}">{{work}}</a>
+  </li>
+
+</ul>
+{% endblock content %}

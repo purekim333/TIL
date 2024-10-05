@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>detail</h1>
+
+<p>글번호 : {{ article.pk }}</p>
+<p>글제목 : {{ article.title }}</p>
+<p>글내용 : {{ article.content }}</p>
+<p>생성시각 : {{ article.created_at }}</p>
+<p>수정시각 : {{ article.updated_at }}</p>
+<a href="{% url "articles:index" %}" class='btn btn-warning'>홈으로</a>
+<a href="{% url "articles:update" article.pk %}" class='btn btn-light'>수정하기</a>
+<hr>
+
+{% endblock content %}
