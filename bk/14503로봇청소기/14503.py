@@ -27,8 +27,6 @@ $90^\circ$ 회전한다.
 바라보는 방향을 기준으로 앞쪽 칸이 청소되지 않은 빈 칸인 경우 한 칸 전진한다.
 1번으로 돌아간다.
 '''
-from collections import deque
-
 direction = [[-1,0], [0,1], [1,0], [0,-1]]
 
 def chk_clean(v_r, v_c, visited):
@@ -37,36 +35,49 @@ def chk_clean(v_r, v_c, visited):
         nc = v_c + dc
         if 0<=nr<N and 0<=nc<M and visited[nr][nc] == 0 and arr[nr][nc] == 0: #청소 가능하면
             return True
+    else :
+        # print('불가능 !')
+        # print(nr, nc)
+        return False
+        
+def rotate_and_chk(vr, vc, vd, visited):
+    nd = (vd+3)%4
+    dr, dc = direction[nd]
+    next_r = vr + dr
+    next_c = vc + dc
+    if 0<=next_r<N and 0<=next_c<M and visited[next_r][next_c] == 0 and arr[next_r][next_c] != 1 :
+        return next_r, next_c, nd
+    else :
+        return vr, vc, nd
+
+def clean(r, c, d):
+    vr, vc, vd = r, c, d
+    visited = [ [0]*M for _ in range(N)]
+    while True :
+        # print('현재위치 : ', vr,vc,vd)
+        visited[vr][vc] = 1
+        if chk_clean(vr, vc, visited):
+            vr, vc, vd = rotate_and_chk(vr,vc,vd,visited)
         else :
-            return False
+            dr, dc = direction[vd]
+            nr = vr-dr
+            nc = vc-dc
+            if 0<=nr<N and 0<=nc<M and arr[nr][nc] == 0:
+                vr, vc = nr, nc
+            else :
+                return visited
+            
 
-def bfs(r, c, d, arr):
-    visited = [[0] * M for _ in range(N)]
-    v_r, v_c = r, c
-    v_d = d
-    q = deque()
-    q.append(v_r, v_c, v_d)
+N , M = map(int, input().split())
+r, c, d = map(int, input().split())
+arr = [list(map(int, input().split())) for _ in range(N)]
 
-    while q:
-        v_r, v_c, v_d = q.popleft()
-        visited[v_r][v_c] = 1
+visited = clean(r,c,d)
 
-        for dr, dc in [[-1, 0], [0, -1], [1, 0], [0, 1]] : #위 왼 아래 오
-            nr = v_r + dr
-            nc = v_c + dc
-            if 0<=nr<N and 0<=nc<M and visited[nr][nc]==0 and arr[nr][nc] == 0: #벽이 아니라면
-                
-                nd = (v_d + 3) % 4 #반시계 회전
-                move_r, move_c = direction[nd]
-                next_r = v_r + move_r
-                next_c = v_c + move_c
-                if 0<=next_r<N and 0<=next_c<M and visited[next_r][next_c] == 0 and arr[next_r][next_c] == 0:
-                    q.append(next_r, next_c, nd)
-                else :
+count = 0
+for i in range(N):
+    for j in range(M):
+        if visited[i][j] == 1:
+            count += 1
 
-T = int(input())
-
-for tc in range(1, T+1):
-    N , M = map(int, input().split())
-    r, c, d = map(int, input().split())
-    arr = [list(map(int, input().split())) for _ in range(N)]
+print(count)
