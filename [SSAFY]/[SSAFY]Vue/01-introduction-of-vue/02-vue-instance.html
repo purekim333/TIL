@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <button v-on:click="increment">
+      {{ number }}
+    </button>
+  </div>
+
+  <!-- CND 작성 -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    // 앱 생성 + 구조분해할당으로 Vue 객체의 createApp 함수 할당
+    const { createApp } = Vue
+    const app = createApp({
+      setup() {
+        const message = ref('hello')
+        console.log(message)
+        console.log(message.value)
+      }
+    })
+
+    // 마운팅
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

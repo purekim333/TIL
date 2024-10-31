@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <p>DOM 요소 조작</p>
+  </div>
+
+  <script>
+    // 생성
+    const h1Tag = document.createElement('h1')
+<<<<<<< HEAD
+    h1Tag.textContent = '제목'
+    console.log(h1Tag)  
+
+=======
+    // console.log(h1Tag)
+    h1Tag.textContent = '제목'
+    console.log(h1Tag)
+    
+>>>>>>> 4f90280452287619429da0eafe9b8ef6af393dfd
+    // 추가
+    const divTag = document.querySelector('div')
+    divTag.appendChild(h1Tag)
+    console.log(divTag)
+<<<<<<< HEAD
+
+    // 삭제
+    const pTag = document.querySelector('p')
+    divTag.removeChild(pTag)
+=======
+    
+    // 삭제
+    const pTag = document.querySelector('p')
+    divTag.removeChild(pTag)
+    
+>>>>>>> 4f90280452287619429da0eafe9b8ef6af393dfd
+  </script>
+</body>
+
+</html>
