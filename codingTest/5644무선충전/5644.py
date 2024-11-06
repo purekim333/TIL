@@ -7,12 +7,11 @@ for tc in range(1,2):
 
     A_arr = [0] + list(map(int, input().split()))
     B_arr = [0] + list(map(int, input().split()))
-    Ar, Ac = 1, 1
-    Br, Bc = 10, 10
+    Ar, Ac = 0, 0
+    Br, Bc = 9, 9
     arr = [[0] * 10 for _ in range(10)]
-    for line in arr :
-        print(line)
-    for k in range(A) :
+
+    for k in range(1, A+1) :
         BCc, BCr, BCrange, BCpower = map(int, input().split())
 
         for r in range(-BCrange, BCrange+1):
@@ -21,8 +20,12 @@ for tc in range(1,2):
                 nc = BCc + c -1
                 # print(k,'번', nr, nc)
                 if 0<=nr<10 and 0<=nc<10 :
-                    BC = str(k)+'번'
-                    arr[nr][nc]=(BC)
+                    if arr[nr][nc] == 0 :
+                        arr[nr][nc] = k
+                    else:
+                        if type(arr[nr][nc]) != type([]) :
+                            arr[nr][nc] = [arr[nr][nc]]
+                        arr[nr][nc].append(k)
         
     print() 
     for line in arr :
@@ -41,12 +44,11 @@ for tc in range(1,2):
         Br += dBr
         Bc += dBc
 
-        for bc in range(A):
+        #그때 그때 최대값을 mx_sum에 다 더함
+        A_sum = 0
+        B_sum = 0
+
+        if arr[Ar][Ac] != 0:
+            arr[Ar][Ac]
+        if arr[Br][Bc] != 0:
             pass
-
-            if abs(Ar-BCr) + abs(Ac-BCc) <= BCrange:
-                # print(time, Ar, Ac)
-                pass
-
-            if abs(Br-BCr) + abs(Bc-BCc) <= BCrange:
-                pass
