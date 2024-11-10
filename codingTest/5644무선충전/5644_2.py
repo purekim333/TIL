@@ -2,7 +2,7 @@ import sys; sys.stdin=open('sample_input.txt')
 
 T = int(input())
 
-for tc in range(1,2):
+for tc in range(1,T+1):
     M, A = map(int, input().split())
 
     A_arr = [0] + list(map(int, input().split()))
@@ -84,6 +84,6 @@ for tc in range(1,2):
                         b_mx = b_bc
 
         mx_sum += a_mx + b_mx
-        print(time, a_mx, b_mx)
+        # print(time, a_mx, b_mx)
 
     print(f'#{tc}', mx_sum)
