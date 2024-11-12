@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1> 업다운 게임 - {{game_session_id}}번째</h1>
+  <p>1 ~ 100 사이의 숫자를 입력해주세요.</p>
+
+  <form action="{% url "make_guess" %}" method="post">
+    {% csrf_token %}
+    <label for="userGames">Your Guess: </label>
+    <input type="number" id="userGuess" required>
+    <button>정답인가요?</button>
+  </form>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  const guessForm = document.querySelector('#gessForm')
+  const resultMessage = document.querySelector('#resultMessage')
+  const sessionId = {{ game_session_id }}
+  const csrfToken = document.querySelector('[name="csrfmiddlewaretoken"]')
+
+  guessForm.addEventListner("submit", function(event) {
+    event.preventDefault();
+    const userGuess = document.querySelector('#userGuess')
+    const data = {
+      'user_guess' : userGuess,
+    }
+
+    axios.post(`/games/make-guess/${sessionId}/`, data, {
+      headers: {
+        'X-CSRFToken' : csrfToken
+      }
+    }).then(response => {
+      console.log("response = ", response)
+    }).catch(error => {
+      console.log("error = ", error)
+    })
+  })
+
+</script>
+</body>
+</html>
